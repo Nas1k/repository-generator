@@ -7,9 +7,9 @@ use Illuminate\Console\Command;
 
 class Generate extends Command
 {
-    protected $signature = 'doctrine:generate:repositories {directory}';
+    protected $signature = 'doctrine:generate:repositories {source} {target}';
 
-    protected $description = 'Generate repositories for entity with tag @Repository';
+    protected $description = 'Generate repositories for entity with tag @Orm\Entity(repository=ClassName)';
 
     /**
      * @var Generator
@@ -27,6 +27,6 @@ class Generate extends Command
 
     public function handle()
     {
-        $this->generator->generate($this->argument('directory'));
+        $this->generator->generate($this->argument('source'), $this->argument('target'));
     }
 }

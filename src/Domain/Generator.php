@@ -3,17 +3,16 @@
 namespace Atypicalbrands\RepositoryGenerator\Domain;
 
 use gossi\codegen\generator\CodeFileGenerator;
-use gossi\codegen\generator\CodeGenerator;
 use gossi\codegen\model\PhpClass;
 use gossi\codegen\model\PhpMethod;
 use gossi\codegen\model\PhpParameter;
 
 class Generator
 {
-    public function generate($dir)
+    public function generate($source, $target)
     {
-        $files = new \RecursiveDirectoryIterator($dir);
-        foreach ($files as $file) {
+        $files = new \RecursiveDirectoryIterator($source);
+        foreach (new \RecursiveIteratorIterator($files) as $file) {
             $metadata = PhpClass::fromFile($file);
             if (!$metadata->getName() || !$metadata->getDocblock()->getTags('Repository')->get(0)) {
                 continue;
@@ -31,10 +30,10 @@ class Generator
                 ->setTraits(['Paginatable'])
                 ->setMethods(
                     [
-                        (new PhpMethod('create'))->setBody('return mew ' . $metadata->getName() . '();'),
+                        (new PhpMethod('create'))->setBody('return new ' . $metadata->getName() . '();'),
                         (new PhpMethod('save'))->setParameters(
-                                [(new PhpParameter('entity'))->setType($metadata->getName())]
-                            )
+                            [(new PhpParameter('entity'))->setType($metadata->getName())]
+                        )
                             ->setBody(
                                 "\$this->getEntityManager()->persist(\$entity);\n\$this->getEntityManager()->flush();"
                             ),
@@ -48,7 +47,9 @@ class Generator
                 )
             ;
 
-            var_dump((new CodeGenerator())->generate($class));
+            $filePath = str_replace('\\', '/', $target . '/' . $metadata->getQualifiedName() . 'Repository.php');
+            mkdir(str_replace('\\', '/', $target . '/' . $metadata->getNamespace()), 0777, true);
+            file_put_contents($filePath, (new CodeFileGenerator())->generate($class));
         }
     }
 }
