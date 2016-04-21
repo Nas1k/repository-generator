@@ -9,7 +9,7 @@ class Generate extends Command
 {
     protected $signature = 'doctrine:generate:repositories {source} {target}';
 
-    protected $description = 'Generate repositories for entity with tag @Orm\Entity(repository=ClassName)';
+    protected $description = 'Generate repositories for entity with tag @Orm\Entity';
 
     /**
      * @var Generator
