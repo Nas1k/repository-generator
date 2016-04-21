@@ -1,0 +1,21 @@
+{
+    "name": "atypicalbrands/repository-generator",
+    "description": "Console command for generate Repositories for Doctrine entity",
+    "keywords": ["doctrine", "repository", "atypicalbrands"],
+    "license": "MIT",
+    "type": "library",
+    "require": {
+        "php": ">=7.0.0",
+        "laravel/lumen-framework": "5.2.*",
+        "gossi/php-code-generator": "0.*"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "~4.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Atypicalbrands\\RepositoryGenerator\\": "src/",
+            "Atypicalbrands\\RepositoryGenerator\\Test\\": "test/"
+        }
+    }
+}
