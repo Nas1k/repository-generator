@@ -7,7 +7,7 @@
     "require": {
         "php": ">=7.0.0",
         "laravel/lumen-framework": "5.2.*",
-        "nas1k/gossi-php-code-generator": "dev-master"
+        "nas1k/gossi-php-code-generator": "~0"
     },
     "require-dev": {
         "phpunit/phpunit": "~4.0"
@@ -17,6 +17,5 @@
             "Atypicalbrands\\RepositoryGenerator\\": "src/",
             "Atypicalbrands\\RepositoryGenerator\\Test\\": "test/"
         }
-    },
-    "minimum-stability": "dev"
+    }
 }
