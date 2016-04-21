@@ -10,9 +10,9 @@ use gossi\codegen\model\PhpParameter;
 
 class Generator
 {
-    public function generate()
+    public function generate($dir)
     {
-        $files = new \RecursiveIteratorIterator(new \DirectoryIterator('app'));
+        $files = new \RecursiveDirectoryIterator($dir);
         foreach ($files as $file) {
             $metadata = PhpClass::fromFile($file);
             if (!$metadata->getName() || !$metadata->getDocblock()->getTags('Repository')->get(0)) {
@@ -47,7 +47,7 @@ class Generator
                     ]
                 )
             ;
-            
+
             var_dump((new CodeGenerator())->generate($class));
         }
     }
