@@ -70,7 +70,7 @@ class Generator
 
             $serviceProvider->addUseStatement($class->getQualifiedName());
             $resisterRepository .= '
-                \$this->app->bind( ' . $class->getName() . '::class, function ($app) {
+                $this->app->bind( ' . $class->getName() . '::class, function ($app) {
                     return new ' . $class->getName() . '($app[\'em\'], new ClassMetadata(' . $class->getName() . '::class));                
                 });            
             ';
