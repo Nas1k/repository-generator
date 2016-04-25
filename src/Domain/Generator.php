@@ -15,6 +15,13 @@ class Generator
     public function generate($source, $target)
     {
         $files = new \RecursiveDirectoryIterator($source);
+        $serviceProvider = (new PhpClass())->setName('RepositoryServiceProvider')
+            ->setNamespace('Atypicalbrands\RepositoryGenerator\Providers')
+            ->addUseStatement('Doctrine\ORM\Mapping\ClassMetadata')
+            ->addUseStatement('Illuminate\Support\ServiceProvider')
+            ->setParentClassName('ServiceProvider');
+        $resisterRepository = '';
+
         foreach (new \RecursiveIteratorIterator($files) as $file) {
             $metadata = PhpClass::fromFile($file);
             if (!$metadata->getName() || !$metadata->getDocblock()->getTags('ORM\Entity')->get(0)) {
@@ -61,10 +68,26 @@ class Generator
                 )
             ;
 
+            $serviceProvider->addUseStatement($class->getQualifiedName());
+            $resisterRepository .= '
+                \$this->app->bind( ' . $class->getName() . '::class, function ($app) {
+                    return new ' . $class->getName() . '($app[\'em\'], new ClassMetadata(' . $class->getName() . '::class));                
+                });            
+            ';
+
             $filePath = str_replace('\\', '/', $target . '/' . $metadata->getQualifiedName() . 'Repository.php');
             $dir = str_replace('\\', '/', $target . '/' . $metadata->getNamespace());
             file_exists($dir) ?: mkdir($dir, 0777, true);
             file_put_contents($filePath, (new CodeFileGenerator())->generate($class));
         }
+        $serviceProvider->setMethods(
+            [
+                (new PhpMethod('register'))->setBody($resisterRepository),
+            ]
+        );
+        $filePath = str_replace('\\', '/', $target . '/' . $serviceProvider->getQualifiedName() . '.php');
+        $dir = str_replace('\\', '/', $target . '/' . $serviceProvider->getNamespace());
+        file_exists($dir) ?: mkdir($dir, 0777, true);
+        file_put_contents($filePath, (new CodeFileGenerator())->generate($serviceProvider));
     }
 }
