@@ -1,8 +1,8 @@
 <?php
 
-namespace Atypicalbrands\RepositoryGenerator\Test\Console\Commands;
+namespace Atypicalbrandsllc\RepositoryGenerator\Test\Console\Commands;
 
-use Atypicalbrands\RepositoryGenerator\Console\Commands\Generate;
+use Atypicalbrandsllc\RepositoryGenerator\Console\Commands\Generate;
 
 class GenerateTest extends \PHPUnit_Framework_TestCase
 {
@@ -14,7 +14,7 @@ class GenerateTest extends \PHPUnit_Framework_TestCase
 
         $generator->expects($this->once())
             ->method('generate');
-        /** @var $generator \Atypicalbrands\RepositoryGenerator\Domain\Generator */
+        /** @var $generator \Atypicalbrandsllc\RepositoryGenerator\Domain\Generator */
 
         (new Generate($generator))->handle();
     }

@@ -1,6 +1,6 @@
 <?php
 
-namespace Atypicalbrands\RepositoryGenerator\Domain;
+namespace Atypicalbrandsllc\RepositoryGenerator\Domain;
 
 use gossi\codegen\generator\CodeFileGenerator;
 use gossi\codegen\model\PhpClass;
