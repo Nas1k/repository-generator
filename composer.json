@@ -1,5 +1,5 @@
 {
-    "name": "atypicalbrands/repository-generator",
+    "name": "atypicalbrandsllc/repository-generator",
     "description": "Console command for generate Repositories for Doctrine entity",
     "keywords": ["doctrine", "repository", "atypicalbrands"],
     "license": "MIT",
