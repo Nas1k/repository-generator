@@ -1,8 +1,8 @@
 <?php
 
-namespace Atypicalbrandsllc\RepositoryGenerator\Console\Commands;
+namespace Atypicalbrands\RepositoryGenerator\Console\Commands;
 
-use Atypicalbrandsllc\RepositoryGenerator\Domain\Generator;
+use Atypicalbrands\RepositoryGenerator\Domain\Generator;
 use Illuminate\Console\Command;
 
 class Generate extends Command

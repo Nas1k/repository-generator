@@ -1,7 +1,7 @@
 {
     "name": "atypicalbrandsllc/repository-generator",
     "description": "Console command for generate Repositories for Doctrine entity",
-    "keywords": ["doctrine", "repository", "atypicalbrandsllc"],
+    "keywords": ["doctrine", "repository", "Atypicalbrands"],
     "license": "MIT",
     "type": "library",
     "require": {
@@ -14,8 +14,8 @@
     },
     "autoload": {
         "psr-4": {
-            "Atypicalbrandsllc\\RepositoryGenerator\\": "src/",
-            "Atypicalbrandsllc\\RepositoryGenerator\\Test\\": "test/"
+            "Atypicalbrands\\RepositoryGenerator\\": "src/",
+            "Atypicalbrands\\RepositoryGenerator\\Test\\": "test/"
         }
     }
 }
