@@ -5,7 +5,7 @@
     "license": "MIT",
     "type": "library",
     "require": {
-        "php": ">=7.0.0",
+        "php": ">=5.5.9",
         "laravel/lumen-framework": "5.2.*",
         "nas1k/gossi-php-code-generator": "~0"
     },
