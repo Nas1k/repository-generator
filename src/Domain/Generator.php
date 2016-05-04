@@ -68,12 +68,10 @@ class Generator
                 )
             ;
 
-            $serviceProvider->addUseStatement($class->getQualifiedName());
-            $serviceProvider->addUseStatement($metadata->getQualifiedName());
             $resisterRepository .= '
-                $this->app->bind( ' . $class->getName() . '::class, function ($app) {
-                    return new ' . $class->getName()
-                . '($app[\'em\'], new ClassMetadata(' . $metadata->getName() . '::class));                
+                $this->app->bind(\\' . $class->getQualifiedName() . '::class, function ($app) {
+                    return new \\' . $class->getQualifiedName()
+                . '($app[\'em\'], new ClassMetadata(\\' . $metadata->getQualifiedName() . '::class));                
                 });            
             ';
 
